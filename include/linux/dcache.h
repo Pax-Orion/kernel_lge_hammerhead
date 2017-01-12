@@ -14,6 +14,9 @@ struct nameidata;
 struct path;
 struct vfsmount;
 
+/* f2fs */
+#define QSTR_INIT(n, l)  { .name = n, .len = l }
+
 /*
  * linux/include/linux/dcache.h
  *

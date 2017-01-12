@@ -1153,6 +1153,17 @@ static inline unsigned int queue_discard_zeroes_data(struct request_queue *q)
 	return 0;
 }
 
+/* f2fs */
+static inline int bdev_discard_alignment(struct block_device *bdev)
+{
+	struct request_queue *q = bdev_get_queue(bdev);
+
+	if (bdev != bdev->bd_contains)
+		return bdev->bd_part->discard_alignment;
+
+	return q->limits.discard_alignment;
+}
+
 static inline unsigned int bdev_discard_zeroes_data(struct block_device *bdev)
 {
 	return queue_discard_zeroes_data(bdev_get_queue(bdev));
